@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by berk on 3/12/16.
  */
-@RequestMapping("/_mp")
+@RequestMapping("/")
 @RestController
 public class WeMessageController {
 
@@ -34,7 +34,7 @@ public class WeMessageController {
         return "error";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "test", method = RequestMethod.GET)
     public String testapi(@RequestParam("signature") String signature) {
         return "hello world " + signature;
     }
