@@ -25,7 +25,7 @@ public class WeMessageController {
         RxWe rxWe = RxWe.Builder.builder().build();
         TokenEntity tokenEntity = rxWe.create(BaseSupportApi.class).getToken(MPConst.GRANT_TYPE, MPConst.APP_ID,
                 MPConst.SECRET_ID).toBlocking().first();
-        String newsigature = WeUtils.generateSignature(tokenEntity.getAccessToken(), timestamp + "", nonce);
+        String newsigature = WeUtils.generateSignature(MPConst.TOKEN, timestamp + "", nonce);
         System.out.println(echostr);
         if (newsigature.equals(signature)) {
             return echostr;
