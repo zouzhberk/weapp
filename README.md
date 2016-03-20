@@ -15,3 +15,5 @@ mvn spring-boot:run
     $ git commit -am "make it better"
     $ git push sae master:1
 
+###
+java -jar -Dport=5050 target/*.jar
