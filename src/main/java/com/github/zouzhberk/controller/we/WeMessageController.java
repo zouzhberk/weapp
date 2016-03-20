@@ -34,5 +34,9 @@ public class WeMessageController {
         return "error";
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String testapi(@RequestParam("signature") String signature) {
+        return "hello world " + signature;
+    }
 
 }
