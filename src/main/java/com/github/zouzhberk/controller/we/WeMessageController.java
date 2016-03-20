@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by berk on 3/12/16.
  */
-@RequestMapping("/")
+@RequestMapping("/_mp")
 @RestController
 public class WeMessageController {
 

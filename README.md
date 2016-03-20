@@ -16,4 +16,8 @@ mvn spring-boot:run
     $ git push sae master:1
 
 ###
+ Uploading...
+
+mvn -B -DskipTests clean dependency:list install
+
 java -jar -Dport=5050 target/*.jar
