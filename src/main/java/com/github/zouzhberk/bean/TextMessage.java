@@ -92,7 +92,7 @@ public class TextMessage {
     }
 
     public void setMsgType(String msgType) {
-        msgType = msgType;
+        this.msgType = msgType;
     }
 
     public String getMsgId() {
