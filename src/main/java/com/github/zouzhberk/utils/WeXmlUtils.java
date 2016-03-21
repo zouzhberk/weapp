@@ -44,10 +44,6 @@ public class WeXmlUtils {
             if (element == null) {
                 return null;
             }
-            StringBuilder sb = new StringBuilder();
-            sb.append("<");
-            sb.append(element.name());
-            sb.append(">");
 
             Object value = null;
             try {
@@ -59,6 +55,10 @@ public class WeXmlUtils {
             if (value == null) {
                 return null;
             }
+            StringBuilder sb = new StringBuilder();
+            sb.append("<");
+            sb.append(element.name());
+            sb.append(">");
 
             if (x.getAnnotation(CDATA.class) == null) {
                 sb.append(value);
