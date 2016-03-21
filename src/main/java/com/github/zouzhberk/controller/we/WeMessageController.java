@@ -57,7 +57,7 @@ public class WeMessageController {
             message.setContent("ok,i known. " + recvMsgEntity.getContent());
 
             String ret = WeXmlUtils.toWeXml(message);
-            LOG.info("ret msg = " + ret);
+            LOG.info("berk, ret msg = " + ret);
             return ret;
         }
 
