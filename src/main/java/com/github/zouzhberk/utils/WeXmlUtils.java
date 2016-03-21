@@ -71,7 +71,7 @@ public class WeXmlUtils {
             sb.append(">");
 
             return sb.toString();
-        }).filter(Objects::nonNull).collect(Collectors.joining("\n"));
+        }).filter(Objects::nonNull).collect(Collectors.joining(""));
         sb1.append(ret);
         sb1.append("</");
         sb1.append(rootname);
