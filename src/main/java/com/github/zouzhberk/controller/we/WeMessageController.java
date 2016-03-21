@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+
 /**
  * Created by berk on 3/12/16.
  */
@@ -46,13 +48,17 @@ public class WeMessageController {
 
             TextMessage recvMsgEntity = WeXmlUtils.fromWeXml(recvMsg, TextMessage.class);
 
-            LOG.info("berk, recv msg = " + recvMsgEntity);
+            LOG.info("berk, recv convetor msg = " + recvMsgEntity);
             TextMessage message = new TextMessage();
             message.setToUserName(recvMsgEntity.getFromUserName());
             message.setFromUserName(recvMsgEntity.getToUserName());
-            message.setContent("ok,i known. " + recvMsgEntity.getContent());
+            message.setCreateTime(Instant.now().getEpochSecond());
             message.setMsgType("text");
-            return WeXmlUtils.toWeXml(message);
+            message.setContent("ok,i known. " + recvMsgEntity.getContent());
+
+            String ret = WeXmlUtils.toWeXml(message);
+            LOG.info("ret msg = " + ret);
+            return ret;
         }
 
         return "success";

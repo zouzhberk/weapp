@@ -85,9 +85,11 @@ public class WeXmlUtils {
         object.setContent("helloworld");
         object.setCreateTime(Instant.now().getEpochSecond());
         object.setFromUserName("dev");
-        object.setMsgId("123");
+
+        object.setMsgType("text");
         object.setToUserName("berk");
 
+        System.out.println(WeXmlUtils.toWeXml(object));
         TextMessage object1 = JAXB.unmarshal("file:///home/berk/IdeaProjects/wxapp/src/test/resources/recevier-text" +
                         "-message.xml",
                 TextMessage.class);
