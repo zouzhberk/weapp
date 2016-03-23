@@ -23,7 +23,7 @@ public class WeMessageController {
     private final static Logger LOG = LoggerFactory.getLogger(WeMessageController.class);
 
     @Autowired
-    private WeatherServiceImpl weatherService;
+    private WeatherServiceImpl weatherServiceImpl;
 
     @RequestMapping(method = RequestMethod.GET)
     public String validateSignature(@RequestParam("signature") String signature, @RequestParam("timestamp") long
@@ -61,7 +61,7 @@ public class WeMessageController {
             message.setCreateTime(Instant.now().getEpochSecond());
             message.setMsgType("text");
             if (Stream.of("天气", "W").anyMatch(x -> recvMsgEntity.getContent().contains(x))) {
-                message.setContent(weatherService.getWeatherInfo(recvMsgEntity.getContent()));
+                message.setContent(weatherServiceImpl.getWeatherInfo(recvMsgEntity.getContent()));
             }
             LOG.info("berk, ret message = " + message);
             String ret = WeXmlUtils.toWeXml(message);

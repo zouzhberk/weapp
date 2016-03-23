@@ -32,7 +32,7 @@ public class RxWeather {
         retrofit = new Retrofit.Builder().addConverterFactory
                 (JacksonConverterFactory
                         .create())
-                .baseUrl(baseUrl)
+                .baseUrl(baseUrl == null ? "https://api.heweather.com/x3/" : null)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }

@@ -6,6 +6,7 @@ import com.github.zouzhberk.essence.rxweather.domain.Cities;
 import com.github.zouzhberk.essence.rxweather.domain.CityWeatherEntity;
 import com.github.zouzhberk.essence.rxweather.features.WeatherApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 import rx.Observable;
 
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  * Created by berk on 3/23/16.
  */
 @Service
+@EnableAutoConfiguration
 public class WeatherServiceImpl {
 
 
@@ -31,6 +33,13 @@ public class WeatherServiceImpl {
     private List<Cities.CityInfoEntity> citylist;
 
     public WeatherServiceImpl() {
+        System.out.println(heWeatherConfig);
+        heWeatherConfig = heWeatherConfig == null ? new HeWeatherConfig() : heWeatherConfig;
+        if (heWeatherConfig == null) {
+            heWeatherConfig = new HeWeatherConfig();
+            heWeatherConfig.setBaseurl("https://api.heweather.com/x3/");
+            heWeatherConfig.setKey("00153ce0e2884aba9f121f2eaea06cc3");
+        }
         weatherApi = RxWeather.Builder.baseUrl(heWeatherConfig.getBaseurl()).build().create(WeatherApi.class);
     }
 
