@@ -2,14 +2,17 @@ package com.github.zouzhberk.controller.we;
 
 
 import com.github.zouzhberk.bean.TextMessage;
+import com.github.zouzhberk.service.WeatherServiceImpl;
 import com.github.zouzhberk.utils.MPConst;
 import com.github.zouzhberk.utils.WeUtils;
 import com.github.zouzhberk.utils.WeXmlUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.stream.Stream;
 
 /**
  * Created by berk on 3/12/16.
@@ -18,6 +21,9 @@ import java.time.Instant;
 @RestController
 public class WeMessageController {
     private final static Logger LOG = LoggerFactory.getLogger(WeMessageController.class);
+
+    @Autowired
+    private WeatherServiceImpl weatherService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String validateSignature(@RequestParam("signature") String signature, @RequestParam("timestamp") long
@@ -54,7 +60,9 @@ public class WeMessageController {
             message.setFromUserName(recvMsgEntity.getToUserName());
             message.setCreateTime(Instant.now().getEpochSecond());
             message.setMsgType("text");
-            message.setContent("ok,i known. " + recvMsgEntity.getContent());
+            if (Stream.of("天气", "W").anyMatch(x -> recvMsgEntity.getContent().contains(x))) {
+                message.setContent(weatherService.getWeatherInfo(recvMsgEntity.getContent()));
+            }
             LOG.info("berk, ret message = " + message);
             String ret = WeXmlUtils.toWeXml(message);
             LOG.info("berk, ret msg = " + ret);
