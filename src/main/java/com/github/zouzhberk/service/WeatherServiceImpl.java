@@ -45,7 +45,7 @@ public class WeatherServiceImpl
         if (heWeatherConfig == null || heWeatherConfig.getKey() == null)
         {
             heWeatherConfig = new HeWeatherConfig();
-            heWeatherConfig.setBaseurl("https://api.heweather.com/");
+            heWeatherConfig.setBaseurl("http://api.heweather.com/");
             heWeatherConfig.setKey("00153ce0e2884aba9f121f2eaea06cc3");
         }
         weatherApi = RxWeather.Builder.baseUrl(heWeatherConfig.getBaseurl())
