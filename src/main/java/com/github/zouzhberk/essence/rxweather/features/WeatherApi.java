@@ -9,12 +9,17 @@ import rx.Observable;
 /**
  * Created by berk (zouzhberk@163.com)) on 3/23/16.
  */
-public interface WeatherApi {
+public interface WeatherApi
+{
 
 
-    @GET("/weather")
-    public Observable<CityWeatherEntity> getCityWeather(@Query("cityid") String cityid, @Query("key") String key);
+    @GET("/x3/weather")
+    public Observable<CityWeatherEntity> getCityWeather(@Query("city") String
+                                                                    city,
+                                                        @Query("key") String
+                                                                key);
 
-    @GET("/citylist")
-    public Observable<Cities> listCityInfo(@Query("search") String search, @Query("key") String key);
+    @GET("/x3/citylist")
+    public Observable<Cities> listCityInfo(@Query("search") String search,
+                                           @Query("key") String key);
 }

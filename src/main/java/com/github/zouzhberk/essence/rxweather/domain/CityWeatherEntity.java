@@ -9,9 +9,25 @@ import java.util.List;
 /**
  * Created by berk on 3/23/16.
  */
-public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.WeatherDataEntity>> {
+public class CityWeatherEntity extends HashMap<String, CityWeatherEntity
+        .WeatherDataEntity[]>
+{
 
-    public static class WeatherDataEntity {
+    public static class WeatherDataEntity
+    {
+
+
+        public Object getAqi()
+        {
+            return aqi;
+        }
+
+        public void setAqi(Object aqi)
+        {
+            this.aqi = aqi;
+        }
+
+        private Object aqi;
         /**
          * city : 南子岛
          * cnty : 中国
@@ -50,44 +66,67 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
         @JsonProperty("daily_forecast")
         private List<DailyForecastEntity> dailyForecast;
 
+        public Object getHourlyForecast()
+        {
+            return hourlyForecast;
+        }
 
+        public void setHourlyForecast(Object hourlyForecast)
+        {
+            this.hourlyForecast = hourlyForecast;
+        }
+
+        @JsonProperty("hourly_forecast")
+        private Object hourlyForecast;
+
+        @JsonProperty("suggestion")
+        private Object suggestion;
 //        @JsonProperty("hourly_forecast")
 //        private List<DailyForecastEntity> hourlyForecast;
 
-        public BasicEntity getBasic() {
+        public BasicEntity getBasic()
+        {
             return basic;
         }
 
-        public void setBasic(BasicEntity basic) {
+        public void setBasic(BasicEntity basic)
+        {
             this.basic = basic;
         }
 
-        public NowWeatherEntity getNow() {
+        public NowWeatherEntity getNow()
+        {
             return now;
         }
 
-        public void setNow(NowWeatherEntity now) {
+        public void setNow(NowWeatherEntity now)
+        {
             this.now = now;
         }
 
-        public String getStatus() {
+        public String getStatus()
+        {
             return status;
         }
 
-        public void setStatus(String status) {
+        public void setStatus(String status)
+        {
             this.status = status;
         }
 
-        public List<DailyForecastEntity> getDailyForecast() {
+        public List<DailyForecastEntity> getDailyForecast()
+        {
             return dailyForecast;
         }
 
-        public void setDailyForecast(List<DailyForecastEntity> dailyForecast) {
+        public void setDailyForecast(List<DailyForecastEntity> dailyForecast)
+        {
             this.dailyForecast = dailyForecast;
         }
 
 
-        public static class BasicEntity {
+        public static class BasicEntity
+        {
             private String city;
             private String cnty;
             private String id;
@@ -100,71 +139,88 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
 
             private UpdateEntity update;
 
-            public String getCity() {
+            public String getCity()
+            {
                 return city;
             }
 
-            public void setCity(String city) {
+            public void setCity(String city)
+            {
                 this.city = city;
             }
 
-            public String getCnty() {
+            public String getCnty()
+            {
                 return cnty;
             }
 
-            public void setCnty(String cnty) {
+            public void setCnty(String cnty)
+            {
                 this.cnty = cnty;
             }
 
-            public String getId() {
+            public String getId()
+            {
                 return id;
             }
 
-            public void setId(String id) {
+            public void setId(String id)
+            {
                 this.id = id;
             }
 
-            public String getLat() {
+            public String getLat()
+            {
                 return lat;
             }
 
-            public void setLat(String lat) {
+            public void setLat(String lat)
+            {
                 this.lat = lat;
             }
 
-            public String getLon() {
+            public String getLon()
+            {
                 return lon;
             }
 
-            public void setLon(String lon) {
+            public void setLon(String lon)
+            {
                 this.lon = lon;
             }
 
-            public UpdateEntity getUpdate() {
+            public UpdateEntity getUpdate()
+            {
                 return update;
             }
 
-            public void setUpdate(UpdateEntity update) {
+            public void setUpdate(UpdateEntity update)
+            {
                 this.update = update;
             }
 
-            public static class UpdateEntity {
+            public static class UpdateEntity
+            {
                 private String loc;
                 private String utc;
 
-                public String getLoc() {
+                public String getLoc()
+                {
                     return loc;
                 }
 
-                public void setLoc(String loc) {
+                public void setLoc(String loc)
+                {
                     this.loc = loc;
                 }
 
-                public String getUtc() {
+                public String getUtc()
+                {
                     return utc;
                 }
 
-                public void setUtc(String utc) {
+                public void setUtc(String utc)
+                {
                     this.utc = utc;
                 }
             }
@@ -173,7 +229,8 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
 
     }
 
-    public static class NowWeatherEntity {
+    public static class NowWeatherEntity
+    {
         /**
          * code : 103
          * txt : 晴间多云
@@ -195,87 +252,108 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
 
         private WindEntity wind;
 
-        public CondEntity getCond() {
+        public CondEntity getCond()
+        {
             return cond;
         }
 
-        public void setCond(CondEntity cond) {
+        public void setCond(CondEntity cond)
+        {
             this.cond = cond;
         }
 
-        public String getFl() {
+        public String getFl()
+        {
             return fl;
         }
 
-        public void setFl(String fl) {
+        public void setFl(String fl)
+        {
             this.fl = fl;
         }
 
-        public String getHum() {
+        public String getHum()
+        {
             return hum;
         }
 
-        public void setHum(String hum) {
+        public void setHum(String hum)
+        {
             this.hum = hum;
         }
 
-        public String getPcpn() {
+        public String getPcpn()
+        {
             return pcpn;
         }
 
-        public void setPcpn(String pcpn) {
+        public void setPcpn(String pcpn)
+        {
             this.pcpn = pcpn;
         }
 
-        public String getPres() {
+        public String getPres()
+        {
             return pres;
         }
 
-        public void setPres(String pres) {
+        public void setPres(String pres)
+        {
             this.pres = pres;
         }
 
-        public String getTmp() {
+        public String getTmp()
+        {
             return tmp;
         }
 
-        public void setTmp(String tmp) {
+        public void setTmp(String tmp)
+        {
             this.tmp = tmp;
         }
 
-        public String getVis() {
+        public String getVis()
+        {
             return vis;
         }
 
-        public void setVis(String vis) {
+        public void setVis(String vis)
+        {
             this.vis = vis;
         }
 
-        public WindEntity getWind() {
+        public WindEntity getWind()
+        {
             return wind;
         }
 
-        public void setWind(WindEntity wind) {
+        public void setWind(WindEntity wind)
+        {
             this.wind = wind;
         }
 
-        public static class CondEntity {
+        public static class CondEntity
+        {
             private String code;
             private String txt;
 
-            public String getCode() {
+            public String getCode()
+            {
                 return code;
             }
 
-            public void setCode(String code) {
+            public void setCode(String code)
+            {
                 this.code = code;
             }
 
-            public String getTxt() {
+            public String getTxt()
+            {
                 return txt;
             }
 
-            public void setTxt(String txt) {
+            public void setTxt(String txt)
+            {
                 this.txt = txt;
             }
         }
@@ -283,7 +361,8 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
 
     }
 
-    public static class DailyForecastEntity {
+    public static class DailyForecastEntity
+    {
         /**
          * sr : 06:24
          * ss : 18:33
@@ -312,108 +391,134 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
         private String vis;
         private WindEntity wind;
 
-        public AstroEntity getAstro() {
+        public AstroEntity getAstro()
+        {
             return astro;
         }
 
-        public void setAstro(AstroEntity astro) {
+        public void setAstro(AstroEntity astro)
+        {
             this.astro = astro;
         }
 
-        public CondEntity getCond() {
+        public CondEntity getCond()
+        {
             return cond;
         }
 
-        public void setCond(CondEntity cond) {
+        public void setCond(CondEntity cond)
+        {
             this.cond = cond;
         }
 
-        public String getDate() {
+        public String getDate()
+        {
             return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(String date)
+        {
             this.date = date;
         }
 
-        public String getHum() {
+        public String getHum()
+        {
             return hum;
         }
 
-        public void setHum(String hum) {
+        public void setHum(String hum)
+        {
             this.hum = hum;
         }
 
-        public String getPcpn() {
+        public String getPcpn()
+        {
             return pcpn;
         }
 
-        public void setPcpn(String pcpn) {
+        public void setPcpn(String pcpn)
+        {
             this.pcpn = pcpn;
         }
 
-        public String getPop() {
+        public String getPop()
+        {
             return pop;
         }
 
-        public void setPop(String pop) {
+        public void setPop(String pop)
+        {
             this.pop = pop;
         }
 
-        public String getPres() {
+        public String getPres()
+        {
             return pres;
         }
 
-        public void setPres(String pres) {
+        public void setPres(String pres)
+        {
             this.pres = pres;
         }
 
-        public TmpEntity getTmp() {
+        public TmpEntity getTmp()
+        {
             return tmp;
         }
 
-        public void setTmp(TmpEntity tmp) {
+        public void setTmp(TmpEntity tmp)
+        {
             this.tmp = tmp;
         }
 
-        public String getVis() {
+        public String getVis()
+        {
             return vis;
         }
 
-        public void setVis(String vis) {
+        public void setVis(String vis)
+        {
             this.vis = vis;
         }
 
-        public WindEntity getWind() {
+        public WindEntity getWind()
+        {
             return wind;
         }
 
-        public void setWind(WindEntity wind) {
+        public void setWind(WindEntity wind)
+        {
             this.wind = wind;
         }
 
-        public static class AstroEntity {
+        public static class AstroEntity
+        {
             private String sr;
             private String ss;
 
-            public String getSr() {
+            public String getSr()
+            {
                 return sr;
             }
 
-            public void setSr(String sr) {
+            public void setSr(String sr)
+            {
                 this.sr = sr;
             }
 
-            public String getSs() {
+            public String getSs()
+            {
                 return ss;
             }
 
-            public void setSs(String ss) {
+            public void setSs(String ss)
+            {
                 this.ss = ss;
             }
         }
 
-        public static class CondEntity {
+        public static class CondEntity
+        {
 
             @JsonProperty("code_d")
             private String codeDay;
@@ -425,96 +530,118 @@ public class CityWeatherEntity extends HashMap<String, List<CityWeatherEntity.We
             @JsonProperty("txt_n")
             private String txtNight;
 
-            public String getCodeDay() {
+            public String getCodeDay()
+            {
                 return codeDay;
             }
 
-            public void setCodeDay(String codeDay) {
+            public void setCodeDay(String codeDay)
+            {
                 this.codeDay = codeDay;
             }
 
-            public String getCodeNight() {
+            public String getCodeNight()
+            {
                 return codeNight;
             }
 
-            public void setCodeNight(String codeNight) {
+            public void setCodeNight(String codeNight)
+            {
                 this.codeNight = codeNight;
             }
 
-            public String getTxtDay() {
+            public String getTxtDay()
+            {
                 return txtDay;
             }
 
-            public void setTxtDay(String txtd) {
+            public void setTxtDay(String txtd)
+            {
                 this.txtDay = txtd;
             }
 
-            public String getTxtNight() {
+            public String getTxtNight()
+            {
                 return txtNight;
             }
 
-            public void setTxtNight(String txtNight) {
+            public void setTxtNight(String txtNight)
+            {
                 this.txtNight = txtNight;
             }
         }
 
-        public static class TmpEntity {
+        public static class TmpEntity
+        {
             private String max;
             private String min;
 
-            public String getMax() {
+            public String getMax()
+            {
                 return max;
             }
 
-            public void setMax(String max) {
+            public void setMax(String max)
+            {
                 this.max = max;
             }
 
-            public String getMin() {
+            public String getMin()
+            {
                 return min;
             }
 
-            public void setMin(String min) {
+            public void setMin(String min)
+            {
                 this.min = min;
             }
         }
     }
 
-    public static class WindEntity {
+    public static class WindEntity
+    {
         private String deg;
         private String dir;
         private String sc;
         private String spd;
 
-        public String getDeg() {
+        public String getDeg()
+        {
             return deg;
         }
 
-        public void setDeg(String deg) {
+        public void setDeg(String deg)
+        {
             this.deg = deg;
         }
 
-        public String getDir() {
+        public String getDir()
+        {
             return dir;
         }
 
-        public void setDir(String dir) {
+        public void setDir(String dir)
+        {
             this.dir = dir;
         }
 
-        public String getSc() {
+        public String getSc()
+        {
             return sc;
         }
 
-        public void setSc(String sc) {
+        public void setSc(String sc)
+        {
             this.sc = sc;
         }
 
-        public String getSpd() {
+        public String getSpd()
+        {
             return spd;
         }
 
-        public void setSpd(String spd) {
+        public void setSpd(String spd)
+        {
             this.spd = spd;
         }
     }
