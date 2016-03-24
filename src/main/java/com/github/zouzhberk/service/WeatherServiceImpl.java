@@ -55,8 +55,8 @@ public class WeatherServiceImpl
 
     public String getWeatherInfo(String cityName)
     {
-        return weatherApi.getCityWeather(cityName.replace("W","").replace("天气",""),
-                "00153ce0e2884aba9f121f2eaea06cc3")
+        return weatherApi.getCityWeather(cityName.replace("W", "")
+                .replace("天气", ""), "00153ce0e2884aba9f121f2eaea06cc3")
                 .toBlocking()
                 .first()
                 .values()
@@ -88,7 +88,7 @@ public class WeatherServiceImpl
 
     public static String toChinaDate(String date)
     {
-        return LocalDate.parse("2016-03-23").format(ISO_LOCAL_DATE);
+        return LocalDate.parse(date).format(ISO_LOCAL_DATE);
     }
 
     private static String toDailyForcastString(CityWeatherEntity
