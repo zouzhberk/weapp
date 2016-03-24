@@ -55,7 +55,7 @@ public class WeatherServiceImpl
 
     public String getWeatherInfo(String cityName)
     {
-        return weatherApi.getCityWeather(cityName,
+        return weatherApi.getCityWeather(cityName.replace("W","").replace("天气",""),
                 "00153ce0e2884aba9f121f2eaea06cc3")
                 .toBlocking()
                 .first()
