@@ -101,9 +101,9 @@ public class WeMessageController
     }
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String testapi(@RequestParam("city") String cityName)
+    public String testapi(@RequestParam("city") String cityName, @RequestParam("key") String key)
     {
-        return weatherServiceImpl.getWeatherInfo(cityName);
+        return weatherServiceImpl.getWeatherInfo(cityName,key);
     }
 
 }

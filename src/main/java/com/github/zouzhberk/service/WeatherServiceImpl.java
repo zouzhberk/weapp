@@ -53,10 +53,10 @@ public class WeatherServiceImpl
                 .create(WeatherApi.class);
     }
 
-    public String getWeatherInfo(String cityName)
+    public String getWeatherInfo(String cityName, String key)
     {
         return weatherApi.getCityWeather(cityName.replace("W", "")
-                .replace("天气", ""), "00153ce0e2884aba9f121f2eaea06cc3")
+                .replace("天气", ""), key)
                 .toBlocking()
                 .first()
                 .values()
@@ -71,6 +71,11 @@ public class WeatherServiceImpl
                 .orElse("找不到" + cityName +
                         "天气情况");
 
+    }
+
+    public String getWeatherInfo(String cityName)
+    {
+        return getWeatherInfo(cityName, "00153ce0e2884aba9f121f2eaea06cc3");
     }
 
     public static final DateTimeFormatter ISO_LOCAL_DATE;
