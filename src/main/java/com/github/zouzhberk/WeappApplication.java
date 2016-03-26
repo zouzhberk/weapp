@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
 
-@SpringBootApplication
 @EnableAutoConfiguration
+@SpringBootApplication
 public class WeappApplication {
 
     public static void main(String[] args) {

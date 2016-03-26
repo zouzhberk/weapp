@@ -7,7 +7,6 @@ import com.github.zouzhberk.essence.rxweather.domain.CityWeatherEntity;
 import com.github.zouzhberk.essence.rxweather.features.WeatherApi;
 import com.github.zouzhberk.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,38 +24,37 @@ import java.util.stream.Stream;
  * Created by berk on 3/23/16.
  */
 @Service
-@EnableAutoConfiguration
-public class WeatherServiceImpl
-{
+public class WeatherServiceImpl {
 
 
-    private final WeatherApi weatherApi;
+    private WeatherApi weatherApi;
 
     @Autowired
     private HeWeatherConfig heWeatherConfig;
 
     private List<Cities.CityInfoEntity> citylist;
 
-    public WeatherServiceImpl()
-    {
+    public WeatherServiceImpl() {
         System.out.println(heWeatherConfig);
-        heWeatherConfig = heWeatherConfig ==
-                null ? new HeWeatherConfig() : heWeatherConfig;
-        if (heWeatherConfig == null || heWeatherConfig.getKey() == null)
-        {
-            heWeatherConfig = new HeWeatherConfig();
-            heWeatherConfig.setBaseurl("http://api.heweather.com/");
-            heWeatherConfig.setKey("00153ce0e2884aba9f121f2eaea06cc3");
-        }
-        weatherApi = RxWeather.Builder.baseUrl(heWeatherConfig.getBaseurl())
-                .build()
-                .create(WeatherApi.class);
+
     }
 
-    public String getWeatherInfo(String cityName, String key)
-    {
-        return weatherApi.getCityWeather(cityName.replace("W", "")
-                .replace("天气", ""), key)
+    public WeatherApi getWeatherApi() {
+        System.out.println(heWeatherConfig);
+        if (weatherApi == null) {
+            weatherApi = RxWeather.Builder.baseUrl(heWeatherConfig.getBaseurl())
+                    .build()
+                    .create(WeatherApi.class);
+
+        }
+        return weatherApi;
+    }
+
+    public String getWeatherInfo(String inputName, String key) {
+
+        String cityName = inputName.replace("W", "")
+                .replace("天气", "");
+        return getWeatherApi().getCityWeather(cityName, key)
                 .toBlocking()
                 .first()
                 .values()
@@ -73,15 +71,13 @@ public class WeatherServiceImpl
 
     }
 
-    public String getWeatherInfo(String cityName)
-    {
-        return getWeatherInfo(cityName, "00153ce0e2884aba9f121f2eaea06cc3");
+    public String getWeatherInfo(String cityName) {
+        return getWeatherInfo(cityName, heWeatherConfig.getKey());
     }
 
     public static final DateTimeFormatter ISO_LOCAL_DATE;
 
-    static
-    {
+    static {
         ISO_LOCAL_DATE = new DateTimeFormatterBuilder()
 
                 .appendText(ChronoField.MONTH_OF_YEAR)
@@ -91,33 +87,25 @@ public class WeatherServiceImpl
                 .toFormatter(Locale.CHINA);
     }
 
-    public static String toChinaDate(String date)
-    {
+    public static String toChinaDate(String date) {
         return LocalDate.parse(date).format(ISO_LOCAL_DATE);
     }
 
     private static String toDailyForcastString(CityWeatherEntity
                                                        .DailyForecastEntity
-                                                       entity)
-    {
+                                                       entity) {
         return String.format(Locale.CHINA, "%s, 温度(%s , %s), 白天%s, 晚上%s",
                 toChinaDate(entity
-                        .getDate()), entity.getTmp().getMax(), entity.getTmp()
-                        .getMin(), entity.getCond()
+                        .getDate()), entity.getTmp().getMin(), entity.getTmp()
+                        .getMax(), entity.getCond()
                         .getTxtDay(), entity.getCond().getTxtNight());
     }
 
     private static String to7DForcastString(CityWeatherEntity
-                                                    .WeatherDataEntity entity)
-    {
+                                                    .WeatherDataEntity entity) {
 
-//        if (!"ok".equalsIgnoreCase(entity.getStatus()))
-//        {
-//            return null;
-//        }
         System.out.println(JsonUtils.toJson(entity));
-        if (entity == null || entity.getBasic() == null)
-        {
+        if (entity == null || entity.getBasic() == null) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
@@ -130,18 +118,15 @@ public class WeatherServiceImpl
         return sb.toString();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         System.out.println(LocalDate.parse("2016-03-23")
                 .format(ISO_LOCAL_DATE)
                 .toString());
     }
 
-    public Optional<String> findCityIdByName(String cityName)
-    {
-        if (citylist == null)
-        {
-            citylist = weatherApi.listCityInfo("allchina", heWeatherConfig
+    public Optional<String> findCityIdByName(String cityName) {
+        if (citylist == null) {
+            citylist = getWeatherApi().listCityInfo("allchina", heWeatherConfig
                     .getKey())
                     .map(x -> x.getCityInfo())
                     .toBlocking()

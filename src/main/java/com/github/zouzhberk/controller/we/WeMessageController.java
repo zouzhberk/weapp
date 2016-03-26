@@ -19,8 +19,7 @@ import java.util.stream.Stream;
  */
 @RequestMapping("/_mp")
 @RestController
-public class WeMessageController
-{
+public class WeMessageController {
     private final static Logger LOG = LoggerFactory.getLogger
             (WeMessageController.class);
 
@@ -29,10 +28,9 @@ public class WeMessageController
 
     @RequestMapping(method = RequestMethod.GET)
     public String validateSignature(@RequestParam("signature") String
-                                                signature, @RequestParam
-            ("timestamp") long timestamp, @RequestParam("nonce") String
-            nonce, @RequestParam("echostr") String echostr)
-    {
+                                            signature, @RequestParam
+                                            ("timestamp") long timestamp, @RequestParam("nonce") String
+                                            nonce, @RequestParam("echostr") String echostr) {
 
 //        RxWe rxWe = RxWe.Builder.builder().build();
 //        TokenEntity tokenEntity = rxWe.create(BaseSupportApi.class)
@@ -42,8 +40,7 @@ public class WeMessageController
                 timestamp +
                         "", nonce);
         System.out.println(echostr);
-        if (newsigature.equals(signature))
-        {
+        if (newsigature.equals(signature)) {
             return echostr;
         }
 
@@ -54,8 +51,7 @@ public class WeMessageController
     public String receiveMessage(@RequestParam("signature") String signature,
                                  @RequestParam("timestamp") long timestamp,
                                  @RequestParam("nonce") String nonce,
-                                 @RequestBody String recvMsg)
-    {
+                                 @RequestBody String recvMsg) {
 
         LOG.info("berk, recv msg = " + recvMsg);
 //        RxWe rxWe = RxWe.Builder.builder().build();
@@ -65,8 +61,7 @@ public class WeMessageController
         String newsigature = WeUtils.generateSignature(MPConst.TOKEN,
                 timestamp +
                         "", nonce);
-        if (newsigature.equals(signature))
-        {
+        if (newsigature.equals(signature)) {
 
             TextMessage recvMsgEntity = WeXmlUtils.fromWeXml(recvMsg,
                     TextMessage.class);
@@ -78,14 +73,11 @@ public class WeMessageController
             message.setCreateTime(Instant.now().getEpochSecond());
             message.setMsgType("text");
             if (Stream.of("天气", "W")
-                    .anyMatch(x -> recvMsgEntity.getContent().contains(x)))
-            {
+                    .anyMatch(x -> recvMsgEntity.getContent().contains(x))) {
                 message.setContent(weatherServiceImpl.getWeatherInfo
                         (recvMsgEntity
-                        .getContent()));
-            }
-            else
-            {
+                                .getContent()));
+            } else {
                 message.setContent("hello [" +
                         recvMsgEntity.getFromUserName() +
                         "]," +
@@ -101,9 +93,9 @@ public class WeMessageController
     }
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String testapi(@RequestParam("city") String cityName, @RequestParam("key") String key)
-    {
-        return weatherServiceImpl.getWeatherInfo(cityName,key);
+    public String testapi(@RequestParam("city") String cityName,
+                          @RequestParam(value = "key", required = false) String key) {
+        return weatherServiceImpl.getWeatherInfo(cityName);
     }
 
 }
