@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>QR Code Demo</title>
+
 </head>
 <body>
-hello world!
+<p>
+    TODO make a nice looking pure client qrcode generator
+    even allow download of the image
+</p>
+<input id="input1" type="text">
+<button id='btn1'>QR Code</button>
+<div id="output"></div>
+<script src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.qrcode.min.js"></script>
+<script>
+    jQuery(function () {
+        $('#btn1').click(function () {
+            console.log($('#input1').val())
+            $('#output').html("");
+            $('#output').qrcode($('#input1').val());
+        })
+        //jQuery('#output').qrcode($('#input1').text());
+    })
+</script>
+
 </body>
 </html>
