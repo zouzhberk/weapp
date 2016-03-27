@@ -9,6 +9,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -46,7 +48,7 @@ public class RxWeather {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
         try {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");
-            InputStream instream = getClass().getResourceAsStream("api.heweather.com.crt");
+            InputStream instream = RxWeather.class.getClassLoader().getResourceAsStream("api.heweather.com.crt");
             Certificate ca;
             ca = cf.generateCertificate(instream);
             KeyStore kStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -80,4 +82,10 @@ public class RxWeather {
         return retrofit.create(featureApi);
     }
 
+
+    public static void main(String[] args) throws IOException {
+        InputStream instream = Files.newInputStream(Paths.get("/home/berk/IdeaProjects/weapp/src/main/java/com/github/zouzhberk/essence/rxweather/api.heweather.com.crt"));
+        System.out.println(instream);
+        //Files.copy(instream, Paths.get("aaa.txt"));
+    }
 }
