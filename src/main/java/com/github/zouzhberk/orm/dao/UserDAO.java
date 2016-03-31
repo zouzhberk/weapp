@@ -3,6 +3,7 @@ package com.github.zouzhberk.orm.dao;
 import com.github.zouzhberk.orm.entity.UserEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -23,6 +24,10 @@ public interface UserDAO extends Repository<UserEntity, Long>
     @Query("select c from UserEntity c")
     Stream<UserEntity> streamAllCustomers();
 
+    @Query("select u from UserEntity u where u.email = :email ")
+    Stream<UserEntity> findAllByEmail(@Param("email") String email);
+
+
     default <S extends UserEntity> S create(S user)
     {
         user.setCreateTime(LocalDateTime.now());
@@ -35,5 +40,6 @@ public interface UserDAO extends Repository<UserEntity, Long>
         user.setUpdateTime(LocalDateTime.now());
         return save(user);
     }
+
 
 }

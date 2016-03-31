@@ -40,4 +40,9 @@ public class UserService
     {
         return userDAO.streamAllCustomers().collect(Collectors.toList());
     }
+
+    public List<UserEntity> listAllUsersByEmail(String email)
+    {
+        return userDAO.findAllByEmail(email).collect(Collectors.toList());
+    }
 }

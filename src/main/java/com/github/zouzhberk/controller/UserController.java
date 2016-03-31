@@ -3,6 +3,7 @@ package com.github.zouzhberk.controller;
 import com.github.zouzhberk.orm.entity.UserEntity;
 import com.github.zouzhberk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,14 @@ public class UserController
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<UserEntity> listAllUsers()
+    public List<UserEntity> listAllUsers(@RequestParam(name = "email",
+            required = false) String email)
     {
-        return userService.listAll();
+        if (StringUtils.isEmpty(email))
+        {
+            return userService.listAll();
+        }
+        return userService.listAllUsersByEmail(email);
     }
+
 }
