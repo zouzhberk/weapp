@@ -1,4 +1,4 @@
-package com.github.zouzhberk.bean;
+package com.github.zouzhberk.service.bean;
 
 import com.github.zouzhberk.utils.WeXmlUtils;
 
@@ -41,6 +41,14 @@ public class TextMessage {
     @WeXmlUtils.CDATA
     @XmlElement(name = "Content")
     private String content;
+
+    @WeXmlUtils.CDATA
+    @XmlElement(name = "Event")
+    private String event;
+
+    @WeXmlUtils.CDATA
+    @XmlElement(name = "EventKey")
+    private String eventKey;
 
     public String getContent() {
         return content;

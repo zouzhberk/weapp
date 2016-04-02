@@ -46,8 +46,8 @@ public class RxWe {
         BaseSupportApi tokenApi = we.create(BaseSupportApi.class);
 
         String grant_type = "client_credential";
-        String appid = "wx526d912d724d940e";
-        String secret = "3c8f212c2fd54bdf32477f71e7375b86";
+        String appid = "wx2d83d8c4f89b6d92";
+        String secret = "a1d6807491a879f17aebc7adce6b3619";
 
         tokenApi.getToken(grant_type, appid, secret).map(x -> {
             System.out.println(x);

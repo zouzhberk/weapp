@@ -1,7 +1,7 @@
 package com.github.zouzhberk.utils;
 
 
-import com.github.zouzhberk.bean.TextMessage;
+import com.github.zouzhberk.service.bean.TextMessage;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
