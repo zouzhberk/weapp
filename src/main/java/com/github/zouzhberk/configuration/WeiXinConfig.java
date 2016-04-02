@@ -1,6 +1,5 @@
 package com.github.zouzhberk.configuration;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +14,13 @@ public class WeiXinConfig {
 
     private String grantType;
 
-    @Value("${appid}")
+    //    @Value("${appid}")
     private String appid;
 
-    @Value("${secret}")
+    //    @Value("${secret}")
     private String secret;
 
-    @Value("${token}")
+    //    @Value("${token}")
     private String customToken;
 
     public String getServerUrl() {
