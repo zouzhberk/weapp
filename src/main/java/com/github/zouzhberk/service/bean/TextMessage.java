@@ -32,6 +32,7 @@ public class TextMessage {
     @XmlElement(name = "CreateTime", required = true)
     private long createTime;
 
+    @WeXmlUtils.CDATA
     @XmlElement(name = "MsgType")
     private String msgType;
 
@@ -49,6 +50,10 @@ public class TextMessage {
     @WeXmlUtils.CDATA
     @XmlElement(name = "EventKey")
     private String eventKey;
+
+    @WeXmlUtils.CDATA
+    @XmlElement(name = "MediaId")
+    private String MediaId;
 
     public String getContent() {
         return content;
